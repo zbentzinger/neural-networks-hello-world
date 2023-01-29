@@ -5,7 +5,7 @@ from time import sleep
 
 
 @dataclass
-class Point:
+class PointV1:
     x: int
     y: int
 
@@ -14,8 +14,8 @@ class Point:
 
 
 @dataclass
-class Cell:
-    point: Point
+class CellV1:
+    point: PointV1
     state: bool = False
     mutation_rate: float = 0.1
 
@@ -41,7 +41,7 @@ class Cell:
 
 
 @dataclass
-class Board:
+class BoardV1:
     columns: int
     rows: int
     entropy: float = 0.05
@@ -56,7 +56,7 @@ class Board:
         os.system("printf '\033c'")
 
     def initialize(self) -> None:
-        self.grid = [[Cell(Point(x, y)) for y in range(self.columns)] for x in range(self.rows)]
+        self.grid = [[CellV1(PointV1(x, y)) for y in range(self.columns)] for x in range(self.rows)]
 
         random_rows = int((self.columns * self.rows) * self.entropy)
         for _ in range(0, random_rows + 1):
@@ -77,8 +77,8 @@ class Board:
         print(board)
 
 @dataclass
-class Simulation:
-    board: Board
+class SimulationV1:
+    board: BoardV1
     ticks: int
     tick_rate: float
 
